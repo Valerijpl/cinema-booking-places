@@ -1,0 +1,47 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+  <script src="app.js"></script>
+  <script src="MainController.js"></script>
+  <script src="Script.js"></script>
+  <link href="main.css" rel="stylesheet" />
+</head>
+<body>
+  <body ng-app="myApp">
+   <div class="header">
+   </div>
+     <div class="container">
+       <h1 style="text-align: center">Cinema</h1>
+     </div>
+   </div>
+
+   <div class="main" ng-controller="MainController">
+    <div class="container">
+        <div ng-repeat="row in places" class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+          <span ng-repeat="place in row.places">
+              <div class="cinema-place" ng-click="select_place(place)" ng-if="place.status == 'free'"><p style="display: inline" class="cinema-place-number">{{place.number}}</p></div>
+              <div class="cinema-place-selected" ng-if="place.status == 'selected'"><p style="display: inline" class="cinema-place-number">{{place.number}}</p></div>
+              <div class="cinema-place-sold" ng-if="place.status == 'reserved'"><p style="display: inline" class="cinema-place-number">SOLD</p></div>
+              <!-- The Modal -->
+              <div ng-show="place.modal == 'new'" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <span class="close" ng-click="cansel(place)">&times;</span>
+                  <h1>Confirm your choise!</h1>
+                  <h3>Are you sure that you want to reserve {{ place.number }} place in {{ row.number }} row?
+                  <button style="margin-left: 5px; float: right" class="btn btn-primary" ng-click="confirm(place)">yes</button>
+                  <button class="btn btn-default" style="margin-left: 5px; float: right" ng-click="cansel(place)">no</button></h3>
+                </div>
+              </div>
+        </span>
+        </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
+</body>
+</html>
